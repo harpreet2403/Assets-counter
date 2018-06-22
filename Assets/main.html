@@ -1,0 +1,249 @@
+<!DOCTYPE>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link href="css/styling_by_ID_dark.css" rel="stylesheet">
+        <link href="css/styling_by_class_dark.css" rel="stylesheet">
+        <link href="css/jquery-ui.min.css" rel="stylesheet">       
+        <title>Lillyweb</title>
+        <script src="js/bootstrap.min.js" type="text/javascript"></script>
+        <script src="js/jquery-ui.min.js" type="text/javascript"></script>
+        <script src="js/jquery.js" type="text/javascript"></script>
+        <script src="js/custom.js" type="text/javascript"></script>
+        <script defer src="https://use.fontawesome.com/releases/v5.0.10/js/all.js" integrity="sha384-slN8GvtUJGnv6ca26v8EzVaR9DC58QEwsIk9q1QXdCU8Yu8ck/tL/5szYlBbqmS+" crossorigin="anonymous"></script>
+        <script>
+
+            $(document).ready(function () {
+                $(".btn-success").click(function () {
+                    location.reload(true);
+                });
+                $('#txtURL').focus(function () {
+                    $(this).removeAttr('placeholder');
+                });
+            });
+
+        </script>
+        
+        <script language="javascript">
+            var pdfCounter = 0;
+            var aspxCounter = 0;
+            var imgCounter = 0;
+            var AudioCounter = 0;
+            var JavascriptCounter = 0;
+            var cssCounter= 0;
+
+     $(function() {
+
+         $('.div_search_token_btn a').click(function() {
+		       $("#update-target").css('display','block');
+				var inputURL = $("#txtURL").val();
+				//alert(inputURL);
+             $.ajax({
+				
+                 type: "get",
+
+               //  url: "https://areapubblica.lillysalute.it/diabete/demo-url.xml",https://areapubblica.lillysalute.it/diabete/sitemap.xml
+				 url: inputURL,
+                 dataType: "xml",
+
+                 success: function(xml) {
+						
+                     $(xml).find("url").each(function(){
+
+                        var url_text = $(this).find("loc").text();
+						
+						var extension = url_text.split('.').pop();
+						  if(extension == "aspx")
+							aspxCounter++;
+							else if(extension == "pdf")
+							    pdfCounter++;
+							else if (extension == "mp3")
+							    AudioCounter++;
+							else if (extension == "ogg")
+							    AudioCounter++;
+							else if (extension == "js")
+							    JavascriptCounter++;
+							else if (extension == "png")
+							    imgCounter++;
+							else if (extension == "jpg")
+							    imgCounter++;
+							else if (extension == "gif")
+							    imgCounter++;
+							else if (extension == "css")
+							    cssCounter++;
+							
+						 else
+						 aspxCounter++;
+                         $('<li></li>')
+                             .html(url_text)
+                             .appendTo('#update-target ol');
+						 
+                     }); //close each(
+					 
+						 $('<span></span>')
+							.html(aspxCounter)
+							.appendTo('#ASPX_countresults p');
+						$('<span></span>')
+							.html(pdfCounter)
+							.appendTo('#PDF_countresults p');
+
+						$('<span></span>')
+                               .html(imgCounter)
+                               .appendTo('#IMG_countresults p');
+
+						$('<span></span>')
+                                  .html(AudioCounter)
+                                  .appendTo('#AUDIO_countresults p');
+
+						$('<span id="javascript"></span>')
+                                     .html(JavascriptCounter)
+                                     .appendTo('#javascript_countresults p');
+						$('<span id="javascript"></span>')
+                                        .html(cssCounter)
+                                        .appendTo('#javascript_countresults p');
+                 }
+
+             }); //close $.ajax(
+
+         }); //close click(
+
+     }); //close $( URL Name: <input type="text" id="urls" value="">            </br></br>
+//Label name: <input type="text" id="label" value="">   </br>    </br>
+                //            Attribute name: <input type="text" id="attribute" value="">       </br></br>                         
+     
+
+        </script>
+        <script>
+            $(document).ready(function () {
+                function createchart() {
+                    
+
+                        var chart = new CanvasJS.Chart("chartContainer", {
+                            theme: "light2", // "light1", "light2", "dark1", "dark2"
+                            exportEnabled: true,
+                            animationEnabled: true,
+                            title: {
+                                text: "Site Analysis completed"
+                            },
+                            data: [{
+                                type: "pie",
+                                startAngle: 25,
+                                toolTipContent: "<b>{label}</b>: {y}%",
+                                showInLegend: "true",
+                                legendText: "{label}",
+                                indexLabelFontSize: 16,
+                                indexLabel: "{label} - {y}",
+                                dataPoints: [
+
+                        
+                                    { y: aspxCounter, label: "Mainpages" },
+                                    { y: pdfCounter, label: "PDF" },
+                                    { y: imgCounter, label: "Images" },
+                                    { y:AudioCounter, label: "Audios" },
+                                    { y:JavascriptCounter, label: "Javascript" },
+                                   { y: cssCounter, label: "CSS" },
+                                ]
+                            }]
+                        });
+                        chart.render();
+                        //alert(2);
+                }
+
+                $(".search_token_btn").click(sometime);
+
+                function sometime() {
+                    //alert(1);
+                    $(".Jumbotron.centered").css("display", "none");
+                    $(" a.canvasjs-chart-credit").css("display", "none");
+                    setTimeout(createchart, 1000);
+
+                    
+                }
+
+            });
+</script>
+		<style>
+		#update-target{
+		    background-color: #dde1e6;
+    border: 1px solid;
+    border-radius: 5px;
+	}
+	#update-target{
+	display:none;
+	}
+    h1.test {
+    color: rgb(14, 63, 80);
+    text-align: center;
+    font-size: 27px;
+}
+    a.canvasjs-chart-credit {
+    display: none;
+}
+		</style>
+		
+    </head>
+    <body>
+        <div class='container'>
+            <nav class="navbar navbar-light">
+                <a class="navbar-brand custom_font_color tata_text" href="#">
+                  
+                    <b>TATA</b> CONSULTANCY SERVICES
+                </a>
+                
+            </nav>
+			 <div class="backbutton">
+                <a href="#" class="btn btn-success btn-lg">
+          <span class="glyphicon glyphicon-arrow-left"></span> HOME
+        </a>
+                    </div>
+                
+            <div class="Jumbotron centered">
+                <h1 class="test">Count URL, Images, CSS, JS and more.</h1>
+             </br>
+                <div id="div_input_GIT_token" class="div_input_GIT_token">
+                    <input type="text" id="txtURL" placeholder="Enter your Sitemap.xml URL here "  class="txt_inputGitToken">
+                </div>
+                <div id="div_search_btn" class=" div_search_btn">
+                    <div class="div_search_token_btn">
+                        <a class="search_token_btn">
+                        <span id="spn_search" class="txt">Search</span>
+                        <span class="round"><i class="fas fa-search" style="color:#2c2f33"></i></span>
+                        </a>
+                    </div>
+                </div>
+				
+            </div>
+			
+			<!-- <div id='update-target'>
+				
+				<!--<div id="ASPX_countresults">
+					<p> Number Of ASPX pages: </p>
+				</div>
+				 <div id="PDF_countresults">
+					<p> Number Of PDF pages: </p>
+				</div>
+
+                 <div id="IMG_countresults">
+					<p> Number Of IMG pages: </p>
+				</div>
+
+                  <div id="javascript_countresults">
+					<p> Number Of Javascript pages: </p>
+				</div>
+
+                  <div id="AUDIO_countresults">
+					<p> Number Of Audio pages: </p>
+				</div>-->
+              <ol></ol>
+				</div>-->
+
+            <div id="chartContainer" style="height: auto; max-width: 920px; margin: 0px auto;">
+               
+            </div>
+<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+
+</div> 
+       
+    </body>
+</html>

@@ -1,0 +1,8 @@
+body{
+    background-color: #60656d;
+}
+
+.table td, .table th {
+    border: none !important;
+}
+

@@ -1,0 +1,17 @@
+body{
+    background: url("https://c.na87.content.force.com/servlet/servlet.ImageServer?id=01540000002D891&oid=00D3000000017Xc&lastMod=1500319528000");
+    background-size: cover;
+}
+
+.table td, .table th {
+    border: none !important;
+}
+
+.btn-success {
+    color: #fff!important;
+    background-color: rgb(182, 31, 126);
+     border-color: transparent !important;
+     padding-bottom:6px;
+     font-size:15px;
+     margin-bottom:30px; 
+}
